@@ -40,8 +40,7 @@ export async function getDb(): Promise<Database> {
   if (_db) return _db;
 
   const SQL = await initSqlJs({
-    locateFile: (file) =>
-      `https://cdn.jsdelivr.net/npm/sql.js@1.13.0/dist/${file}`,
+    locateFile: (file) => `${import.meta.env.BASE_URL}${file}`,
   });
 
   const saved = await loadBytes();
