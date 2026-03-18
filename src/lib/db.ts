@@ -39,9 +39,8 @@ let _db: Database | null = null;
 export async function getDb(): Promise<Database> {
   if (_db) return _db;
 
-  const SQL = await initSqlJs({
-    locateFile: (file) => `${import.meta.env.BASE_URL}${file}`,
-  });
+  const wasmBinary = await fetch(`${import.meta.env.BASE_URL}sql-wasm.wasm`).then((r) => r.arrayBuffer());
+  const SQL = await initSqlJs({ wasmBinary });
 
   const saved = await loadBytes();
   _db = saved ? new SQL.Database(saved) : new SQL.Database();

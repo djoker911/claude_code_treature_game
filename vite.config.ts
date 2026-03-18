@@ -6,6 +6,9 @@
   export default defineConfig({
     base: '/claude_code_treature_game/',
     plugins: [react()],
+    optimizeDeps: {
+      exclude: ['sql.js'],
+    },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       alias: {
