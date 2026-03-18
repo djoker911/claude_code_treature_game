@@ -4,7 +4,8 @@ import jwt from 'jsonwebtoken';
 import db from '../db.js';
 
 const router = Router();
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-in-prod';
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) throw new Error('JWT_SECRET environment variable is required');
 
 export function requireAuth(req, res, next) {
   const auth = req.headers.authorization;
